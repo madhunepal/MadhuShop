@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MadhuShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200715023315_databasecreatedwithcategorytable")]
+    [Migration("20200715025744_databasecreatedwithcategorytable")]
     partial class databasecreatedwithcategorytable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
