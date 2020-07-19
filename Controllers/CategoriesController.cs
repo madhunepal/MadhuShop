@@ -34,7 +34,7 @@ namespace MadhuShop.Controllers
             }
 
             var category = await _context.Catogory
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace MadhuShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DisplayOrder")] Category category)
         {
-            if (id != category.Id)
+            if (id != category.CategoryId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace MadhuShop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if (!CategoryExists(category.CategoryId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace MadhuShop.Controllers
             }
 
             var category = await _context.Catogory
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CategoryId== id);
             if (category == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace MadhuShop.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Catogory.Any(e => e.Id == id);
+            return _context.Catogory.Any(e => e.CategoryId == id);
         }
     }
 }

@@ -9,8 +9,10 @@ namespace MadhuShop.Models
     public class Category
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryDescription { get; set; }
+        public List<Cloth> Clothes { get; set; }
         public int DisplayOrder { get; set; }
     }
 }

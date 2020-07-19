@@ -15,5 +15,6 @@ namespace MadhuShop.DataLayer
         }
 
         public DbSet<Category> Catogory { get; set; }
+        public DbSet<ApplicationType> ApplicationType { get; set; }
     }
 }
