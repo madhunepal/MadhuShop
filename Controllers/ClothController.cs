@@ -1,5 +1,6 @@
 ﻿
 using MadhuShop.Repository;
+using MadhuShop.Viewmodel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,13 @@ namespace MadhuShop.Controllers
             clothrepository = cloth;
         }
 
-        public ViewResult viewResult()
+        public IActionResult viewResult()
         {
-            return View(clothrepository.GetAllClothes);
+            //return View(clothrepository.GetAllClothes);
+            var clothlistView = new ClothListViewModel();
+            //clothlistView.Clothes = clothrepository.GetAllClothes;
+            clothlistView.CurrentCategory = "BestSeller";
+            return View(clothlistView);
         }
     }
 }

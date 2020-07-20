@@ -13,7 +13,7 @@ namespace MadhuShop.DataLayer
         {
 
         }
-
+        public DbSet<Cloth> Clothes { get; set; }
         public DbSet<Category> Catogory { get; set; }
         public DbSet<ApplicationType> ApplicationType { get; set; }
     }

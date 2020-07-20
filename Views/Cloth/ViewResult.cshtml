@@ -1,7 +1,25 @@
-﻿@model IEnumerable<MadhuShop.Models.Cloth>
+﻿@model ClothListViewModel
 @{
     ViewData["Title"] = "View Clothes";
 }
 
-<h1>ViewResult</h1>
+<h1>View Result</h1>
 
+<html>
+<head>
+    <meta />
+</head>
+<body>
+    @foreach (var cloth in Model.Clothes)
+    {
+    <div>
+        <h2>@cloth.Name</h2>
+        <h2>@cloth.Price.ToString("C")</h2>
+        <h2>@cloth.Category.CategoryName</h2>
+    </div>
+
+
+    }
+
+</body>
+</html>
