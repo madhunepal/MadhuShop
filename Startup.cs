@@ -16,12 +16,12 @@ namespace MadhuShop
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -31,7 +31,9 @@ namespace MadhuShop
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IClothrepository, ClothRepository>();                    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +61,8 @@ namespace MadhuShop
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                
             });
         }
     }

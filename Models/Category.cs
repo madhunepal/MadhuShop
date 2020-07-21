@@ -13,6 +13,6 @@ namespace MadhuShop.Models
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public List<Cloth> Clothes { get; set; }
-        public int DisplayOrder { get; set; }
+       
     }
 }

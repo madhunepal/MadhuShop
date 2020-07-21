@@ -1,5 +1,7 @@
 ﻿
+using MadhuShop.Models;
 using MadhuShop.Repository;
+
 using MadhuShop.Viewmodel;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,23 +13,49 @@ namespace MadhuShop.Controllers
 {
     public class ClothController : Controller
     {
-        private readonly IClothrepository clothrepository;
+        private readonly IClothrepository _clothrepository;
 
-        private readonly ICategoryRepository categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ClothController( ICategoryRepository category, IClothrepository cloth)
+        public ClothController(IClothrepository cloth , ICategoryRepository category)
         {
-            categoryRepository = category;
-            clothrepository = cloth;
+            _clothrepository = cloth;
+            _categoryRepository = category;
+           
         }
 
-        public IActionResult viewResult()
+        public IActionResult viewResult(string category)
         {
-            //return View(clothrepository.GetAllClothes);
-            var clothlistView = new ClothListViewModel();
-            //clothlistView.Clothes = clothrepository.GetAllClothes;
-            clothlistView.CurrentCategory = "BestSeller";
-            return View(clothlistView);
+            IEnumerable<Cloth> cloths;
+            string currentCategory;
+
+            if (string.IsNullOrEmpty(category))
+            {
+                cloths =  _clothrepository.GetAllClothes.OrderByDescending(c=>c.ClothId); // _candyRepository.GetAllCandy.OrderBy(c => c.CandyId);
+                currentCategory = "All Clothes";
+            }
+            else
+            {
+                cloths = _clothrepository.GetAllClothes.Where(c => c.Category.CategoryName == category);
+
+                currentCategory = _categoryRepository.GetAllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+            }
+
+            return View(new ClothListViewModel
+            {
+                Clothes = cloths,
+                CurrentCategory = currentCategory
+            });
+        }
+
+
+        public IActionResult Details(int id)
+        {
+            var cloth = _clothrepository.GetClothById(id);
+            if (cloth == null)
+                return NotFound();
+
+            return View(cloth);
         }
     }
 }

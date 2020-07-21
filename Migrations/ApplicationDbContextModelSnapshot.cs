@@ -35,20 +35,107 @@ namespace MadhuShop.Migrations
 
             modelBuilder.Entity("MadhuShop.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DisplayOrder")
+                    b.Property<string>("CategoryDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Catogory");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryDescription = "belly bottom pant for male",
+                            CategoryName = "Pant"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryDescription = "Cow Boy Hat",
+                            CategoryName = "Hat"
+                        });
+                });
+
+            modelBuilder.Entity("MadhuShop.Models.Cloth", b =>
+                {
+                    b.Property<int>("ClothId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageThumbNailUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOnSale")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnStock")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
-                    b.ToTable("Catogory");
+                    b.HasKey("ClothId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Clothes");
+
+                    b.HasData(
+                        new
+                        {
+                            ClothId = 1,
+                            CategoryId = 1,
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Tortor posuere ac ut consequat. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Lacus sed turpis tincidunt id aliquet risus feugiat in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu.",
+                            ImageThumbNailUrl = "\\Images\\jeans",
+                            ImageUrl = "\\images\\jeans",
+                            IsOnSale = false,
+                            IsOnStock = true,
+                            Name = "Soft Jeans",
+                            Price = 45.950000000000003
+                        },
+                        new
+                        {
+                            ClothId = 2,
+                            CategoryId = 2,
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Tortor posuere ac ut consequat. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo. Lacus sed turpis tincidunt id aliquet risus feugiat in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu.",
+                            ImageThumbNailUrl = "\\Images\\hat",
+                            ImageUrl = "\\images\\hat",
+                            IsOnSale = false,
+                            IsOnStock = true,
+                            Name = "Cow boy hat",
+                            Price = 45.950000000000003
+                        });
+                });
+
+            modelBuilder.Entity("MadhuShop.Models.Cloth", b =>
+                {
+                    b.HasOne("MadhuShop.Models.Category", "Category")
+                        .WithMany("Clothes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
