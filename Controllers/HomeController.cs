@@ -6,21 +6,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MadhuShop.Models;
+using MadhuShop.Repository;
+using MadhuShop.Viewmodel;
 
 namespace MadhuShop.Controllers
 {
+    
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+       // private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IClothrepository _clothRepository;
+        public HomeController(IClothrepository clothrepository)
         {
-            _logger = logger;
+            _clothRepository = clothrepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var homeViewModel = new HomeViewModel()
+            {
+                ClothOnSale = _clothRepository.GetAllClothOnSale
+            };
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()
