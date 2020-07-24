@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MadhuShop.DataLayer;
+using MadhuShop.Models;
 using MadhuShop.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,9 +32,11 @@ namespace MadhuShop
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
-
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IClothrepository, ClothRepository>();                    
+            services.AddScoped<IClothrepository, ClothRepository>();
+            services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetCart(sc));
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +54,7 @@ namespace MadhuShop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
