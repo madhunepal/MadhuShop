@@ -16,6 +16,8 @@ namespace MadhuShop.DataLayer
         public DbSet<Cloth> Clothes { get; set; }
         public DbSet<Category> Catogory { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
