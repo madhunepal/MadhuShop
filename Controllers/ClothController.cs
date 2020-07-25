@@ -31,7 +31,7 @@ namespace MadhuShop.Controllers
 
             if (string.IsNullOrEmpty(category))
             {
-                cloths =  _clothrepository.GetAllClothes.OrderByDescending(c=>c.ClothId); // _candyRepository.GetAllCandy.OrderBy(c => c.CandyId);
+                cloths =  _clothrepository.GetAllClothes.OrderByDescending(c=>c.ClothId); // _clothRepository.GetAllCandy.OrderBy(c => c.CandyId);
                 currentCategory = "All Clothes";
             }
             else

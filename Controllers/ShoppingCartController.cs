@@ -11,12 +11,12 @@ namespace CandyShop.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly IClothrepository _candyRepository;
+        private readonly IClothrepository _clothRepository;
         private readonly ShoppingCart _shoppingCart;
 
         public ShoppingCartController(IClothrepository candyRepository, ShoppingCart shoppingCart)
         {
-            _candyRepository = candyRepository;
+            _clothRepository = candyRepository;
             _shoppingCart = shoppingCart;
         }
 
@@ -35,7 +35,7 @@ namespace CandyShop.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int clothId)
         {
-            var selectedCandy = _candyRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
+            var selectedCandy = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
 
             if (selectedCandy != null)
             {
@@ -47,7 +47,7 @@ namespace CandyShop.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int clothId)
         {
-            var selectedCandy = _candyRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
+            var selectedCandy = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
 
             if (selectedCandy != null)
             {
