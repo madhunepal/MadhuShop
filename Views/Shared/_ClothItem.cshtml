@@ -2,10 +2,10 @@
 
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
-        <img src="@Model.ImageThumbNailUrl" alt="image for candy shop" />
+        <img src="@Model.ImageThumbNailUrl" alt="image for madhu shop" />
         <div class="caption">
             <h3 class="pull-right">@Model.Price.ToString("c")</h3>
-            <h3><a asp-controller="Candy" asp-action="Details" asp-route-id="@Model.ClothId">@Model.Name</a></h3>
+            <h3><a asp-controller="Cloth" asp-action="Details" asp-route-id="@Model.ClothId">@Model.Name</a></h3>
             <p>@Model.Description</p>
         </div>
         <div class="addToCart">
