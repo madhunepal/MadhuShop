@@ -14,9 +14,9 @@ namespace CandyShop.Controllers
         private readonly IClothrepository _clothRepository;
         private readonly ShoppingCart _shoppingCart;
 
-        public ShoppingCartController(IClothrepository candyRepository, ShoppingCart shoppingCart)
+        public ShoppingCartController(IClothrepository clothRepository, ShoppingCart shoppingCart)
         {
-            _clothRepository = candyRepository;
+            _clothRepository = clothRepository;
             _shoppingCart = shoppingCart;
         }
 
@@ -33,13 +33,13 @@ namespace CandyShop.Controllers
             return View(shoppingCartViewModel);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int clothId)
+        public RedirectToActionResult AddToShoppingCart(int ClothId)
         {
-            var selectedCandy = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
+            var selectedCloth = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == ClothId);
 
-            if (selectedCandy != null)
+            if (selectedCloth != null)
             {
-                _shoppingCart.AddToCart(selectedCandy, 1);
+                _shoppingCart.AddToCart(selectedCloth, 1);
             }
 
             return RedirectToAction("Index");
@@ -47,11 +47,11 @@ namespace CandyShop.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int clothId)
         {
-            var selectedCandy = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
+            var selectedCloth = _clothRepository.GetAllClothes.FirstOrDefault(c => c.ClothId == clothId);
 
-            if (selectedCandy != null)
+            if (selectedCloth != null)
             {
-                _shoppingCart.RemoveFromCart(selectedCandy);
+                _shoppingCart.RemoveFromCart(selectedCloth);
             }
 
             return RedirectToAction("Index");

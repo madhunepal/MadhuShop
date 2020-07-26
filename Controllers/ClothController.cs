@@ -49,9 +49,9 @@ namespace MadhuShop.Controllers
         }
 
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int clothid)
         {
-            var cloth = _clothrepository.GetClothById(id);
+            var cloth = _clothrepository.GetClothById(clothid);
             if (cloth == null)
                 return NotFound();
 
