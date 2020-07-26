@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
 
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -14,6 +17,7 @@
     <div class="container">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
+               
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
@@ -21,39 +25,56 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                                             
+                    <a class="navbar-brand" rel="home" href="#" title="Shopping Made Easy">
+                        <img style="padding:5px; width: 100px; height: 50px; border-radius: 10px 30px;"
+                             src="~/Images/madhushoplogo.jpg">
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                     <ul class="nav navbar-nav">
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         @await Component.InvokeAsync("CategoryMenu")
                         <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
                         @await Component.InvokeAsync("ShoppingCartSummary")
-                        <partial name="_LoginPartial" />
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello ! @UserManager.GetUserName(User) </a>
+                            </li>
+                            <li class="nav-item">
+                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="row">
-            <div class="col-md-2">
-                <p class="lead">
-                    <img class="img-responsive" style="padding:20px; width: 200px; height: 150px; border-radius: 15px 50px;" src="~/Images/madhushoplogo.jpg" />
-                </p>
-            </div>
+            @*<div class="col-md-2">
+                    <p class="lead">
+                        <img class="img-responsive" style="padding:20px; width: 200px; height: 150px; border-radius: 15px 50px;" src="~/Images/madhushoplogo.jpg" />
+                    </p>
+                </div>*@
             <div class="col-md-9">
                 @RenderBody()
             </div>
         </div>
         @RenderSection("Scripts", required: false)
     </div>
-    @*<style>
-        #rcorners3 {
-            border-radius: 15px 50px;
-            background: #73AD21;
-            padding: 20px;
-            width: 200px;
-            height: 150px;
-        }
-    </style>*@
+
 </body>
 </html>

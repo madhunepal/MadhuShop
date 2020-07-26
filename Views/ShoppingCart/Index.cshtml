@@ -1,12 +1,15 @@
 ﻿@model ShoppingCartViewModel
 
-<h2>Shopping Cart: All your candy you love</h2>
+
+
+
+<h2>Shopping Cart: Clothes that you have selected</h2>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>&nbsp;</th>
-            <th>Selected Amount</th>
-            <th>Candy</th>
+            <th>Number of Item</th>
+            <th>Cloth</th>
             <th class="text-right">Price</th>
             <th class="text-right">Subtotal</th>
         </tr>
@@ -15,7 +18,7 @@
         @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
         {
             <tr>
-                <td class="text-left"><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-candyId="@item.Cloth.ClothId" alt="">Decrease Amount</a></td>
+                <td class="text-left"><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-clothId="@item.Cloth.ClothId" alt="">Decrease Amount</a></td>
                 <td class="text-center">@item.Amount</td>
                 <td class="text-left">@item.Cloth.Name</td>
                 <td class="text-right">@item.Cloth.Price.ToString("c")</td>

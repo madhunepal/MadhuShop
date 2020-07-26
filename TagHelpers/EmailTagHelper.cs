@@ -1,13 +1,12 @@
-﻿
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MadhuShop.Taghelper
+namespace MadhuShop.TagHelpers
 {
-    public class EmailTaghelper : TagHelper
+    public class EmailTagHelper : TagHelper
     {
         public string Address { get; set; }
         public string LinkText { get; set; }
