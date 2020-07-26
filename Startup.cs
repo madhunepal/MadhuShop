@@ -37,6 +37,7 @@ namespace MadhuShop
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IClothrepository, ClothRepository>();
             services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetCart(sc));
+            services.AddScoped<IorderRepository, OrderRepository>();
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddRazorPages();
