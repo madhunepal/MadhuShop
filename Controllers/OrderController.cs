@@ -43,7 +43,7 @@ namespace MadhuShop.Controllers
         }
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = "Thank you for shoping with us. Happy Wearing and See you soon";
+            ViewBag.CheckoutCompleteMessage = "Thank you for shoping with us. Your package will be delivered soon.Hope to See you soon";
             return View();
         }
 

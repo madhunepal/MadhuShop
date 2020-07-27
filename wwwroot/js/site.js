@@ -59,8 +59,8 @@ footer {
 }
 
 .navbar - inverse {
-    background - color: #a593c2;
-    border - color: #a593c2;
+    background - color: #813eed;
+    border - color: #6339a8;
 }
 
 .nav.navbar - nav.navbar - right li a {
